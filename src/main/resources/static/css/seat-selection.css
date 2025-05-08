@@ -1,0 +1,203 @@
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f6f8;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+.seat {
+    width: 40px;
+    height: 45px;
+    margin: 6px;
+    display: inline-block;
+    text-align: center;
+    line-height: 45px;
+    font-weight: bold;
+    font-size: 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.seat:hover:not(.booked):not(:disabled) {
+    transform: scale(1.05);
+    opacity: 0.9;
+}
+
+.available {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.booked {
+    background-color: #ccc;
+    color: white;
+    cursor: not-allowed;
+}
+
+.selected {
+    background-color: #ff9800 !important;
+    color: #fff;
+}
+.selected { background-color: #2196F3; } /* Xanh dương: đang chọn */
+.couple {
+    background-color: #4d69d9;
+    width:92px;
+}
+.seat.booked {
+    background-color: #ccc;
+    color: white;
+    cursor: not-allowed;
+}
+.legend-table td { padding: 5px 10px; }
+.legend-color { width: 20px; height: 20px; display: inline-block; margin-right: 8px; vertical-align: middle; }
+.container {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.left-panel, .right-panel {
+    flex: 1;
+}
+
+.seat-grid {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.summary-box {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.summary-box h3 {
+    margin-top: 0;
+    color: #333;
+}
+
+.selected-seats {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 15px;
+}
+
+.selected-seats li {
+    padding: 5px 10px;
+    margin: 5px 0;
+    background-color: #eee;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+button[type="submit"] {
+    margin-top: 15px;
+    padding: 12px 20px;
+    background-color: #007bff;
+    color: white;
+    font-size: 15px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        padding: 0 10px;
+    }
+
+    .left-panel, .right-panel {
+        width: 100%;
+    }
+}
+.btn-back-top {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    text-decoration: none;
+    background-color: #6c757d;
+    color: white;
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-weight: 500;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    transition: background-color 0.3s ease;
+    z-index: 1000;
+}
+
+.btn-back-top:hover {
+    background-color: #5a6268;
+}
+
+.invoice-table-wrapper {
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+.invoice-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.invoice-table th,
+.invoice-table td {
+    padding: 8px;
+    text-align: center;
+    border: 1px solid #ccc;
+}
+.invoice-table thead th {
+    background-color: #f2f2f2;
+}
+
+.btn-pay {
+    display: inline-block;
+    margin-top: 16px;
+    padding: 12px 24px;
+    background-color: #ff4d4f;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.btn-pay:hover {
+    background-color: #d9363e;
+    transform: translateY(-2px);
+}
+
+
+

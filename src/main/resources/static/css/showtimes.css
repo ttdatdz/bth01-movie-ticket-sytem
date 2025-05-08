@@ -1,0 +1,142 @@
+/* Reset đơn giản */
+body, h1, h2, p, ul, li {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Font và nền tổng thể */
+body.showtimes-page {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to right, #f8f9fa, #e9ecef);
+    color: #343a40;
+    padding: 20px;
+}
+
+/* Container chính chia 2 cột */
+.container {
+    display: flex;
+    gap: 40px;
+    max-width: 1100px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Cột trái chứa thông tin phim */
+.container_left {
+    flex: 1;
+    text-align: center;
+}
+
+.movie-title {
+    font-size: 28px;
+    color: #212529;
+    margin-bottom: 15px;
+}
+
+.movie-poster {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    margin-bottom: 20px;
+}
+
+.movie-description {
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 10px 0;
+    color: #495057;
+}
+
+/* Giá vé */
+.container_left p {
+    margin-top: 10px;
+    font-weight: bold;
+    color: #e83e8c;
+}
+
+/* Cột phải chứa danh sách showtime */
+.container_right {
+    flex: 1;
+}
+
+.showtimes-heading {
+    font-size: 22px;
+    color: #343a40;
+    margin-bottom: 20px;
+}
+
+.showtime-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Mỗi item */
+.showtime-item {
+    background-color: #f1f3f5;
+    padding: 15px 20px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.3s ease;
+}
+
+.showtime-item:hover {
+    background-color: #dee2e6;
+}
+
+.showtime-time {
+    font-size: 16px;
+    color: #343a40;
+}
+
+/* Nút Book Now */
+.btn-book {
+    text-decoration: none;
+    background-color: #0d6efd;
+    color: white;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.btn-book:hover {
+    background-color: #0b5ed7;
+}
+
+/* Thông báo khi không có showtimes */
+.no-showtimes {
+    font-size: 16px;
+    color: rgba(52, 58, 64, 0.5); /* chữ mờ */
+    font-style: italic;
+    padding: 10px;
+    text-align: center;
+}
+.btn-back-top {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    text-decoration: none;
+    background-color: #6c757d;
+    color: white;
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-weight: 500;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    transition: background-color 0.3s ease;
+    z-index: 1000;
+}
+
+.btn-back-top:hover {
+    background-color: #5a6268;
+}
+

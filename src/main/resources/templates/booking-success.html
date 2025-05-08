@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Đặt vé thành công</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}"><!-- Link tới file CSS -->
+    <link rel="stylesheet" th:href="@{/css/booking-success.css}">
+
+</head>
+<body>
+<h1 class="title">Bạn đã đặt vé thành công!</h1>
+<h3 class="subtitle">Hóa đơn đặt vé</h3>
+<div class="invoice-wrapper">
+    <div class="invoice-table-wrapper">
+        <table class="invoice-table">
+            <thead>
+            <tr>
+                <th class="table-header">Ghế</th>
+                <th class="table-header">Loại ghế</th>
+                <th class="table-header">Giá (VND)</th>
+            </tr>
+            </thead>
+            <tbody id="selectedSeatsDetails">
+            <tr th:each="seat : ${ticket.seats}">
+                <td th:text="${seat.seatNumber}" class="table-cell"></td>
+                <td th:text="${seat.seatType}" class="table-cell"></td>
+                <td th:text="${seat.seatType == 'DOUBLE' ? #numbers.formatDecimal(showTime.getMovie().getTicketPrice() * 2, 0, 'COMMA', 0, 'POINT') : #numbers.formatDecimal(showTime.getMovie().getTicketPrice(), 0, 'COMMA', 0, 'POINT')}" class="table-cell"></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <p class="info"><strong>Tên phim:</strong> <span th:text="${showTime.movie.title}"></span></p>
+        <p class="info"><strong>Suất chiếu:</strong> <span th:text="${#temporals.format(showTime.startTime, 'dd/MM/yyyy HH:mm')}"></span></p>
+        <p class="info">
+            <strong>Tổng tiền:</strong>
+            <span th:text="${#numbers.formatDecimal(totalPrice, 0, 'COMMA', 0, 'POINT')}" class="total-price"></span>
+            <span class="total-price">VND</span>
+        </p>
+
+    </div>
+    <div class="back-link-wrapper">
+        <a href="/" class="back-link">Về trang chủ</a>
+    </div>
+</div>
+
+
+
+</body>
+</html>

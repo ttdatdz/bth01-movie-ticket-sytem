@@ -1,0 +1,76 @@
+/* General Body Styles */
+body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+/* Error Container */
+.error-container {
+    max-width: 600px;
+    margin: 100px auto;
+    padding: 40px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.error-title {
+    font-size: 36px;
+    font-weight: bold;
+    color: #e74c3c;
+    margin-bottom: 20px;
+}
+
+.error-message {
+    font-size: 18px;
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+.error-details {
+    font-size: 16px;
+    color: #7f8c8d;
+    margin-bottom: 30px;
+    word-wrap: break-word;
+}
+
+.retry-link {
+    display: inline-block;
+    padding: 12px 24px;
+    font-size: 18px;
+    background-color: #3498db;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.retry-link:hover {
+    background-color: #2980b9;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 600px) {
+    .error-container {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .error-title {
+        font-size: 28px;
+    }
+
+    .error-message, .error-details {
+        font-size: 14px;
+    }
+
+    .retry-link {
+        font-size: 16px;
+        padding: 10px 20px;
+    }
+}

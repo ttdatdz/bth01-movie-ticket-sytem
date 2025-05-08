@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh sách vé đã đặt</title>
+    <link rel="stylesheet" href="/css/ticket-list.css">
+</head>
+<body>
+<header>
+    <div class="back-button">
+        <a href="/" class="btn-back">← Trang chính</a>
+    </div>
+    <h1>Vé đã đặt của bạn</h1>
+</header>
+
+<main class="ticket-container">
+    <div th:if="${#lists.isEmpty(tickets)}" class="no-ticket">
+        Bạn chưa đặt vé nào.
+    </div>
+
+    <div class="ticket-card" th:each="ticket : ${tickets}">
+        <h2 th:text="${ticket.showTime.movie.title}"></h2>
+        <p><strong>Suất chiếu:</strong> <span th:text="${#temporals.format(ticket.showTime.startTime, 'dd/MM/yyyy HH:mm')}"></span></p>
+        <p><strong>Ghế:</strong>
+            <span th:each="seat : ${ticket.seats}" th:text="${seat.seatNumber + ' '}" />
+        </p>
+        <p><strong>Tổng tiền:</strong> <span th:text="${#numbers.formatDecimal(ticket.totalPrice, 0, 'COMMA', 0, 'POINT')}"></span> VND</p>
+
+        <form th:action="@{/tickets/cancel/{id}(id=${ticket.id})}" method="post">
+            <button class="cancel-button" type="submit">Hủy vé</button>
+        </form>
+    </div>
+</main>
+</body>
+</html>

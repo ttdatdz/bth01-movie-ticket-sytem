@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Chọn ghế</title>
+    <link rel="stylesheet" th:href="@{/css/seat-selection.css}">
+</head>
+<body>
+<h1>Chọn ghế</h1>
+
+<form th:action="@{/tickets/book}" method="post" onsubmit="return prepareSelectedSeats()">
+    <input type="hidden" name="showTimeId" th:value="${showTimeId}">
+    <input type="hidden" name="seatIds" id="seatIds">
+    <input type="hidden" id="ticketPrice" th:value="${showTime.getMovie().getTicketPrice()}">
+
+    <div class="container">
+        <a class="btn-back-top" th:href="@{/movies/{movieId}/showtimes(movieId=${showTime.getMovie().getId()})}">Quay lại</a>
+
+        <!-- Bên trái: Ghế -->
+        <div class="left-panel">
+            <div class="seat-grid">
+                <!-- Ghế thường -->
+                <div th:each="seat : ${seats}" th:if="${seat.seatType == 'SINGLE'}">
+                    <button type="button"
+                            th:id="'seat-' + ${seat.id}"
+                            th:data-seat-id="${seat.id}"
+                            th:data-seat-number="${seat.seatNumber}"
+                            th:class="'seat ' + (${seat.available} ? 'available' : 'booked')"
+                            th:disabled="${!seat.available}"
+                            th:text="${seat.seatNumber}"
+                            onclick="toggleSeat(this)">
+                    </button>
+                </div>
+
+                <!-- Ghế đôi -->
+                <div th:each="seat : ${seats}" th:if="${seat.seatType == 'DOUBLE'}">
+                    <button type="button"
+                            th:id="'seat-' + ${seat.id}"
+                            th:data-seat-id="${seat.id}"
+                            th:data-seat-number="${seat.seatNumber}"
+                            th:class="'seat couple ' + (${seat.available} ? 'available' : 'booked')"
+                            th:disabled="${!seat.available}"
+                            th:text="${seat.seatNumber}"
+                            onclick="toggleSeat(this)">
+                    </button>
+                </div>
+            </div>
+
+            <!-- Chú thích -->
+            <h3>Chú thích:</h3>
+            <table class="legend-table">
+                <tr><td><span class="legend-color" style="background-color: #ccc;"></span></td><td>Đã đặt</td></tr>
+                <tr><td><span class="legend-color" style="background-color: #4CAF50;"></span></td><td>Ghế thường</td></tr>
+                <tr><td><span class="legend-color" style="background-color: #4d69d9;"></span></td><td>Ghế đôi</td></tr>
+                <tr><td><span class="legend-color" style="background-color: #2196F3;"></span></td><td>Ghế đang chọn</td></tr>
+            </table>
+        </div>
+
+        <!-- Bên phải: Hóa đơn -->
+        <div class="right-panel">
+            <div class="summary-box">
+                <h3>Hóa đơn đặt vé</h3>
+
+                <div class="invoice-table-wrapper">
+                    <table class="invoice-table">
+                        <thead>
+                        <tr>
+                            <th>Ghế</th>
+                            <th>Loại ghế</th>
+                            <th>Giá (VND)</th>
+                        </tr>
+                        </thead>
+                        <tbody id="selectedSeatsDetails">
+                        <!-- Thêm bằng JS -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <p><strong>Tên phim:</strong> <span th:text="${showTime.getMovie().getTitle()}"></span></p>
+                <p><strong>Suất chiếu:</strong> <span th:text="${#temporals.format(showTime.startTime, 'dd/MM/yyyy HH:mm')}"></span></p>
+                <p><strong>Tổng tiền:</strong> <span id="totalPrice">0</span> VND</p>
+
+                <input type="text" name="customerName" placeholder="Tên của bạn" required>
+                <button class="btn-pay" type="submit">Thanh toán</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<!-- Phần Script -->
+<script>
+    const selectedSeatIds = new Set();
+    const seatPrices = {}; // lưu kiểu ghế và giá
+    const seatTable = document.getElementById("selectedSeatsDetails");
+    const ticketPrice = parseInt(document.getElementById("ticketPrice").value);
+
+    function updateTotalPrice() {
+        let totalPrice = 0;
+        selectedSeatIds.forEach(seatId => {
+            const seatType = seatPrices[seatId].type;
+            const seatCost = seatType === 'DOUBLE' ? ticketPrice * 2 : ticketPrice;
+            totalPrice += seatCost;
+        });
+        document.getElementById("totalPrice").textContent = totalPrice.toLocaleString();
+    }
+
+    function toggleSeat(button) {
+        const seatId = button.dataset.seatId;
+        const seatNumber = button.dataset.seatNumber;
+        const seatType = button.classList.contains("couple") ? 'DOUBLE' : 'SINGLE';
+        const seatCost = seatType === 'DOUBLE' ? ticketPrice * 2 : ticketPrice;
+
+        if (!seatPrices[seatId]) {
+            seatPrices[seatId] = { type: seatType, price: seatCost };
+        }
+
+        if (selectedSeatIds.has(seatId)) {
+            selectedSeatIds.delete(seatId);
+            button.classList.remove("selected");
+            const row = document.getElementById("row-" + seatId);
+            if (row) row.remove();
+        } else {
+            selectedSeatIds.add(seatId);
+            button.classList.add("selected");
+
+            const row = document.createElement("tr");
+            row.id = "row-" + seatId;
+
+            const tdSeat = document.createElement("td");
+            tdSeat.textContent = seatNumber;
+
+            const tdType = document.createElement("td");
+            tdType.textContent = seatType === 'DOUBLE' ? 'Ghế đôi' : 'Ghế thường';
+
+            const tdPrice = document.createElement("td");
+            tdPrice.textContent = seatCost.toLocaleString();
+
+            row.appendChild(tdSeat);
+            row.appendChild(tdType);
+            row.appendChild(tdPrice);
+
+            seatTable.appendChild(row);
+        }
+
+        updateTotalPrice();
+    }
+
+    function prepareSelectedSeats() {
+        const seatIdsInput = document.getElementById("seatIds");
+        seatIdsInput.value = Array.from(selectedSeatIds).join(",");
+        if (seatIdsInput.value === "") {
+            alert("Vui lòng chọn ít nhất 1 ghế.");
+            return false;
+        }
+        return true;
+    }
+</script>
+
+</body>
+</html>

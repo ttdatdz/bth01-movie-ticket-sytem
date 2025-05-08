@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${movie.title} + ' Showtimes'"></title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/showtimes.css}">
+</head>
+<body class="showtimes-page">
+<div class="container">
+    <a class="btn-back-top" th:href="@{/movies}">Quay lại</a>
+    <div class="container_left">
+        <h1 class="movie-title" th:text="${movie.title}"></h1>
+        <img th:src="@{${movie.posterUrl}}" alt="Poster" class="movie-poster"/>
+        <p class="movie-description" th:text="${movie.description}"></p>
+        <p>Giá vé: <span th:text="${movie.ticketPrice}"></span> VND</p>
+    </div>
+    <div class="container_right">
+        <h2 class="showtimes-heading">Các suất chiếu</h2>
+
+        <!-- Nếu có showtimes -->
+        <ul class="showtime-list" th:if="${showTimes != null and !showTimes.isEmpty()}">
+            <li class="showtime-item" th:each="showTime : ${showTimes}">
+                <span class="showtime-time" th:text="${#temporals.format(showTime.startTime, 'dd/MM/yyyy HH:mm')}"></span>
+                <a class="btn-book" th:href="@{/seats (showTimeId=${showTime.id})}">Đặt ghế ngay</a>
+            </li>
+        </ul>
+
+        <!-- Nếu không có showtimes -->
+        <p class="no-showtimes"  th:unless="${showTimes != null and !showTimes.isEmpty()}">Chưa có suất chiếu nào</p>
+
+    </div>
+
+
+</div>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Đặt vé thất bại</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}"><!-- Link tới file CSS -->
+    <link rel="stylesheet" th:href="@{/css/booking-error.css}">
+</head>
+<body>
+<div class="error-container">
+    <h1 class="error-title">Đặt vé thất bại!</h1>
+    <p class="error-message">Rất tiếc, chúng tôi không thể hoàn tất việc đặt vé của bạn. Vui lòng thử lại sau.</p>
+    <p class="error-details" th:text="${error}"></p> <!-- Hiển thị lỗi chi tiết từ Model nếu có -->
+    <a href="/" class="retry-link">Quay lại trang chủ</a>
+</div>
+</body>
+</html>

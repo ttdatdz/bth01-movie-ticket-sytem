@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Rạp phim ABC</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/movie-list.css}">
+</head>
+<body>
+<div class="back-button">
+    <a href="/" class="btn-back">← Trang chính</a>
+</div>
+<h1>Danh sách phim</h1>
+<div class="list-movie">
+<div class="movie-card" th:each="movie : ${movies}">
+
+        <h3 th:text="${movie.title}"></h3>
+        <img th:src="@{${movie.posterUrl}}" alt="Poster" class="movie-poster"/>
+        <p>Giá vé: <span th:text="${movie.ticketPrice}"></span> VND</p>
+        <a th:href="@{/movies/{movieId}/showtimes(movieId=${movie.id})}">Đặt vé</a>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Movie Ticket System</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+</head>
+<body>
+<header>
+    <h1>Movie Ticket Booking System</h1>
+    <nav>
+        <a href="/movies" class="nav-button">🎬 Danh sách phim</a>
+        <a href="/tickets" class="nav-button">🎟️ Vé đã đặt</a>
+    </nav>
+</header>
+
+<main>
+    <section class="poster-section">
+        <h2>Phim nổi bật</h2>
+        <div class="poster-grid">
+            <div th:each="movie : ${movies}">
+                <a th:href="@{/movies/{movieId}/showtimes(movieId=${movie.id})}">
+                    <img th:src="@{${movie.posterUrl}}" th:alt="${movie.title}" />
+                </a>
+            </div>
+        </div>
+    </section>
+</main>
+</body>
+</html>

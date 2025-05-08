@@ -1,0 +1,88 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f5f7fa;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    background-color: #34495e;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.ticket-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 30px;
+    gap: 20px;
+}
+
+.ticket-card {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 20px 25px;
+    width: 300px;
+    transition: transform 0.3s ease;
+}
+
+.ticket-card:hover {
+    transform: translateY(-5px);
+}
+
+.ticket-card h2 {
+    margin-top: 0;
+    color: #2c3e50;
+}
+
+.ticket-card p {
+    margin: 10px 0;
+    color: #555;
+}
+
+.cancel-button {
+    margin-top: 15px;
+    padding: 10px 18px;
+    border: none;
+    background-color: #e74c3c;
+    color: white;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.cancel-button:hover {
+    background-color: #c0392b;
+}
+
+.no-ticket {
+    font-size: 18px;
+    color: #888;
+}
+.back-button {
+    position: absolute;
+    left: 20px;
+    top: 50px;
+}
+
+.btn-back {
+    color: white;
+    background-color: transparent;
+    border: 2px solid white;
+    padding: 8px 12px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-back:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
