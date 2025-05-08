@@ -47,7 +47,7 @@ public class TicketController {
 
         try {
             // Gọi service để đặt vé cho tất cả các ghế đã chọn
-            Ticket ticket1 = ticketService.bookTicket(showTimeId, seatIdArray, customerName);
+//            Ticket ticket1 = ticketService.bookTicket(showTimeId, seatIdArray, customerName);
             Ticket ticket = ticketService.bookTicket(showTimeId, seatIdArray, customerName);
 
             ShowTime showTime = showTimeService.getShowTimeById(showTimeId);
