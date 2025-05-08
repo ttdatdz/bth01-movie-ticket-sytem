@@ -23,6 +23,7 @@ public class MovieController {
     //    Hiển thị danh sách phim
     @GetMapping
     public String showMovieList(Model model) {
+        System.out.println("");
         model.addAttribute("movies", movieService.getAllMovies());
         return "movie-list";  // Trỏ đến file movie-list.html
     }
